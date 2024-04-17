@@ -28,13 +28,13 @@ class ClinicHours(models.Model):
     clinic = models.ForeignKey(Clinic, on_delete=models.CASCADE,
                                related_name='clinic_hours', verbose_name=_('Clínica'))
     day_of_week = models.IntegerField(choices=[
-        (1, _('Segunda Feira')),
-        (2, _('Terça Feira')),
-        (3, _('Quarta Feira')),
-        (4, _('Quinta Feira')),
-        (5, _('Sexta Feira')),
-        (6, _('Sábado')),
-        (0, _('Domingo')),
+        (0, _('Segunda Feira')),
+        (1, _('Terça Feira')),
+        (2, _('Quarta Feira')),
+        (3, _('Quinta Feira')),
+        (4, _('Sexta Feira')),
+        (5, _('Sábado')),
+        (6, _('Domingo')),
     ], verbose_name=_('Dia da Semana'))
     opening_time = models.TimeField(verbose_name=_('Hora de Abertura'))
     closing_time = models.TimeField(verbose_name=_('Hora de Fechamento'))
