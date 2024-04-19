@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from appointments.models import Appointment
-from appointments.serializers import AppointmentSerializer, ScheduledTimeSerializer
+from appointments.serializers import AppointmentSerializer, ScheduledSerializer
 
 
 class AppointmentCreateView(CreateAPIView):
@@ -12,10 +12,10 @@ class AppointmentCreateView(CreateAPIView):
     serializer_class = AppointmentSerializer
 
 
-class ScheduledTimeView(APIView):
+class ScheduledView(APIView):
     @staticmethod
     def get(req):
-        serializer = ScheduledTimeSerializer(data=req.data)
+        serializer = ScheduledSerializer(data=req.data)
         if serializer.is_valid():
             scheduled_times = serializer.data
             return Response(scheduled_times, status=status.HTTP_200_OK)

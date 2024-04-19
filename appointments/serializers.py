@@ -1,5 +1,6 @@
-from rest_framework import serializers
 from django.utils import timezone
+from rest_framework import serializers
+
 from appointments.models import Appointment
 from clinics.models import Plan
 
@@ -18,7 +19,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
         return value
 
 
-class ScheduledTimeSerializer(serializers.Serializer):
+class ScheduledSerializer(serializers.Serializer):
 
     @staticmethod
     def to_representation(instance, **kwargs):
@@ -31,12 +32,17 @@ class ScheduledTimeSerializer(serializers.Serializer):
             return {'scheduled': scheduled_times}
 
         for appointment in appointments.values():
+            appointment['time'] = timezone.localtime(appointment['time'])
             time = appointment['time']
             plan_id = appointment['plan_id']
             plan = plans.filter(id=plan_id).values().first()
             scheduled_times.append({
                 'appointment': appointment,
-                'plan': plan,
+                'plan': {
+                    'id': plan['id'],
+                    'name': plan['name'],
+                    'duration': plan['duration'].total_seconds() / 3600
+                },
                 'scheduled_time': {
                     'day': time.date(),
                     'hour': time.time()
