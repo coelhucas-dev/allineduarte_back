@@ -15,4 +15,4 @@ def send_mail(sender, instance, **kwargs):
     subject = 'test'
     body = 'test'
 
-    send_email(sender_mail, sender_password, recipient_email, subject, body)
+    # send_email(sender_mail, sender_password, recipient_email, subject, body)

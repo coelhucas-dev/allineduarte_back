@@ -1,4 +1,5 @@
 from datetime import timedelta
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -7,11 +8,14 @@ from utils.constants import COUNTRY_CODES
 
 class Clinic(models.Model):
     name = models.CharField(max_length=255, verbose_name=_('Nome'))
-    address1 = models.CharField(max_length=255, verbose_name=_('Endereço 1'))
+    title = models.CharField(max_length=255, default='Atendimento', verbose_name=_('Titulo'))
+    address1 = models.CharField(max_length=255, verbose_name=_('Rua'))
     address2 = models.CharField(
-        max_length=100, blank=True, null=True, verbose_name=_('Endereço 2'))
+        max_length=100, verbose_name=_('Bairro'))
+    city = models.CharField(max_length=255, verbose_name=_('Cidade'))
     country_code = models.CharField(
         max_length=5, default='+55', choices=COUNTRY_CODES, verbose_name=_('Código do País'))
+    maps_link = models.URLField()
     phone = models.CharField(max_length=20, verbose_name=_('Telefone'))
     plans = models.ManyToManyField(
         'Plan', related_name='clinics', verbose_name=_('Planos'))
