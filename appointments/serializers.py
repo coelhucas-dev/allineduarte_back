@@ -36,6 +36,7 @@ class ScheduledSerializer(serializers.Serializer):
             time = appointment['time']
             plan_id = appointment['plan_id']
             plan = plans.filter(id=plan_id).values().first()
+            if not plan: continue
             scheduled_times.append({
                 'appointment': appointment,
                 'plan': {
