@@ -10,7 +10,7 @@ class Appointment(models.Model):
     plan = models.ForeignKey(
         Plan, on_delete=models.PROTECT, related_name='plan', verbose_name=_('Plano'))
     time = models.DateTimeField(verbose_name=_('Dia e Horário'), unique=True)
-    confirmed = models.BooleanField(verbose_name=_('Confirmado'))
+    confirmed = models.BooleanField(verbose_name=_('Confirmado'), default=False)
 
     class Meta:
         verbose_name = _('Agendamento')
