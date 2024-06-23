@@ -1,17 +1,26 @@
+import uuid
+
 from django.db import models
-from django.forms import CharField
 from django.utils.translation import gettext_lazy as _
 
 from utils.constants import COUNTRY_CODES
 
 
 class Patient(models.Model):
-    name = CharField(max_length=255)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=255, verbose_name=_('Name'))
     country_code = models.CharField(
         max_length=5, default='+55', choices=COUNTRY_CODES, verbose_name=_('Código do País'))
     phone = models.CharField(max_length=20, verbose_name=_('Telefone'))
-    email = models.EmailField()
+    email = models.EmailField(unique=True, verbose_name=_('Email'))
     birth_date = models.DateField(verbose_name=_('Data de nascimento'))
+
+    class Meta:
+        verbose_name = _('Paciente')
+        verbose_name_plural = _('Pacientes')
+
+    def __str__(self):
+        return self.name
 
 
 class PatientProfile(models.Model):
