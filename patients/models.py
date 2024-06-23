@@ -12,7 +12,7 @@ class Patient(models.Model):
     country_code = models.CharField(
         max_length=5, default='+55', choices=COUNTRY_CODES, verbose_name=_('Código do País'))
     phone = models.CharField(max_length=20, verbose_name=_('Telefone'))
-    email = models.EmailField(unique=True, verbose_name=_('Email'))
+    email = models.EmailField(verbose_name=_('Email'))
     birth_date = models.DateField(verbose_name=_('Data de nascimento'))
 
     class Meta:
@@ -20,7 +20,7 @@ class Patient(models.Model):
         verbose_name_plural = _('Pacientes')
 
     def __str__(self):
-        return self.name
+        return f'{self.name} || {self.email} || {self.country_code} {self.phone}'
 
 
 class PatientProfile(models.Model):
