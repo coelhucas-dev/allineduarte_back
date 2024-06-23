@@ -7,7 +7,7 @@ from utils.constants import COUNTRY_CODES
 
 
 class Patient(models.Model):
-    id = models.BigAutoField(primary_key=True, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255, verbose_name=_('Name'))
     country_code = models.CharField(
         max_length=5, default='+55', choices=COUNTRY_CODES, verbose_name=_('Código do País'))
