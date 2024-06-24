@@ -32,9 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-]
+CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS')
 
 # Application definition
 
