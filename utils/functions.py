@@ -1,9 +1,10 @@
+import logging
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 
-def send_email(user, pwd, recipient, subject, html_body):
+def send_email(user, pwd, recipient, subject, html_body, logger):
     sender = user
     receiver = recipient if isinstance(recipient, list) else [recipient]
 
@@ -24,5 +25,6 @@ def send_email(user, pwd, recipient, subject, html_body):
         server.login(user, pwd)
         server.sendmail(sender, receiver, message.as_string())
         server.close()
+        logger.info(f'Email sent to {recipient}!')
     except Exception as e:
-        print(e)
+        logger.error(f'Error while sending email: {e}')
